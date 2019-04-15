@@ -1,10 +1,52 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>Jenka's imageboard</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <main id="main">
+        <header class="main-header">
+            <div class="logo-wrapper">
+                <img class="logo" width="70" src="./img/logo.png" alt="">
+            </div>
+        </header>
+
+
+
+        <div class="images-container" v-for="img in images">
+            <div class="eachImage-wrapper"> <!-- here also may be added the img.id, don't know yet -->
+                <h3 class="img-title">{{img.title}}</h3>
+                <img class="img-itself" src="{{img.url}}" alt="">
+                <p class="img-desc">{{img.description}}</p>
+            </div>
+
+        </div>
+    </main>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
+
+
+<!--
+
+<h1 :class="className + ugly" :id="idName">Hi, {{ name }}</h1>
+<!--  v-model="name" binds input to the name property, should show "World"
+<input v-model="name">
+
+<ul v-if="cities.length"> <!--  v-if="cities.length" condition -->
+
+
+    <!--  v-for loops through all cities in a array city
+    <li v-for="city in cities">{{ city.name }}, {{city.country}}</li>
+
+    <li v-on:click="click"></li>
+    <li v-on:click="click('city.name')" v-for="city in cities">{{ city.name }}</li>
+    <!-- instead of v-on:click="" we can use @click=""
+</ul>
+
+
+
+-->
