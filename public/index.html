@@ -12,16 +12,25 @@
             </div>
         </header>
 
+    <form class="image-form" action="index.html" method="post">
+        <!-- v-model binds input with the data object from script.js file, every time the user types smth, it updates in the data object   -->
+        <input v-model="form.title" type="text" name="title" value="" placeholder="image title">
+        <input v-model="form.description" type="text" name="description" value="" placeholder="image description">
+        <input v-model="form.username" type="text" name="username" value="" placeholder="image username">
+        <input type="file" name="file" value="" accept="image/*" v-on:change="handleFileChange">
+        <button @click.stop.prevent ="uploadFile" type="button" name="button">Upload</button>
+    </form>
 
-
-        <div class="images-container" v-for="img in images">
-            <div class="eachImage-wrapper"> <!-- here also may be added the img.id, don't know yet -->
+        <div class="image-gallery">
+            <div class="image-wrapper" v-if="images.length" :key="img.id" v-for="img in images">
+                <div class="eachImage-wrapper"> <!-- here also may be added the img.id, don't know yet -->
+                    <img class="img-itself" :src="img.url" :alt="img.title" width="350" height="350">
+                </div>
                 <h3 class="img-title">{{img.title}}</h3>
-                <img class="img-itself" src="{{img.url}}" alt="">
                 <p class="img-desc">{{img.description}}</p>
             </div>
-
         </div>
+
     </main>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>

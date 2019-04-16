@@ -1,3 +1,15 @@
+/*
+colors: #525b56
+
+*/
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #132226;
+    color: #a4978e;
+}
+
 .funky {
     background-color: red;
 }
@@ -7,8 +19,63 @@
 }
 
 .main-header {
-    border: 1px solid #000;
+    border-bottom: 2px solid #a4978e;
 }
 
 .logo {
+}
+
+.image-form {
+    margin-top: 20px;
+    padding-left: 50px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #a4978e;
+}
+
+.image-form input {
+    border: none;
+    background-color: #a4978e;
+    width: 200px;
+    height: 50px;
+    padding-left: 10px;
+}
+
+.image-form button {
+    border: none;
+    width: 70px;
+    height: 50px;
+}
+
+.image-form button:hover {
+    background-color: #a4978e;
+}
+
+.image-form button:active {
+    border: 1px solid #a4978e;
+    background-color: #525b56;
+}
+
+.image-gallery {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 40px;
+    margin-right: 40px;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+.image-wrapper {
+    width: 25%;
+    border: 2px solid #a4978e;
+}
+
+.eachImage-wrapper {
+    overflow: hidden;
+    border-bottom: 2px solid #a4978e;
+}
+
+.img-itself {
+    min-height: ;
 }
