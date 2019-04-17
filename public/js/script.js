@@ -1,20 +1,38 @@
 (function() {
-    Vue.component("first-component", {
+    // register component "first-component" globally with method of the Vue constructor.
+    Vue.component("image-modal", {
+        // name of the component
         template: "#template",
+        props: ["img", "title", "url", "description", "username"],
+        // data in vue.component must be a function that returns an object.
         data: function() {
             return {
                 name: "Jenka",
-                title: "" // value will come after ajax request
+                title: "", // value will come after ajax request
+                url: "",
+                description: "",
+                username: "",
+                images: ""
             };
         },
-        props: ["funky", "nickname"],
         mounted: function() {
-            // should have
+            console.log("mounted"); //
+            var self = this;
+            axios.get("/images/:id").then(function(resp) {
+                console.log("resp: ", resp);
+                console.log("resp.data: ", resp.data);
+                self.images = resp.data; // don't know, if it should be "self.images" or something else
+            });
         },
         methods: {
             click: function() {
-                this.name = this.funky;
-                this.$emit("change", this.funky); // $emit ised to fire an event
+                this.currentImage = img.id;
+                // this.currentImage??? or what?
+                this.$emit("change", this.currentImage); // $emit used to fire an event
+            },
+            closeModal: function() {
+                // this.currentImage??? or what?
+                this.$emit("close", this.currentImage); // am not sure, if the method closeModal should be here or elsewhere, and
             }
         }
     });
@@ -42,15 +60,22 @@
                 console.log("resp: ", resp); // shows response object
                 console.log("resp.data: ", resp.data); // shows array of 3 initial images
                 self.images = resp.data;
-            });
+            }),
+                // should it be here or where?
+                axios.post("/comment", {
+                    comment: this.comment,
+                    username: this.username,
+                    id: this.id
+                });
+            //and then unshift the comment into the array of components
         },
         methods: {
             // every function that runs in response to an event is defined in "methods"
             handleFileChange: function(e) {
                 console.log("handleFileChange running"); // funkt
-                //console.log("e: ", e); // e - event object, with property target with a property file with a array-like object
-                //console.log("e.target.files[0]: ", e.target.files[0]);
-                this.form.file = e.target.files[0]; // this stores the file that was just selected in the "file" propery of the data object
+                // e - event object with property target with a property file with a array-like object
+                this.form.file = e.target.files[0];
+                // this stores the file that was just selected in the "file" propery of the data object
             },
             uploadFile: function(e) {
                 console.log("uploadFile"); // funkt
@@ -61,17 +86,14 @@
                 formData.append("title", this.form.title);
                 //console.log("formData: ", formData); // empty object
 
-                var mrrr = this;
+                var self = this;
 
                 axios.post("/upload", formData).then(function(res) {
                     console.log("then of POST /upload");
                     console.log("res.data: ", res.data);
-                    mrrr.images.unshift(res.data[0]);
+                    self.images.unshift(res.data[0]);
                 });
             }
-            //nameChange: function(n) {
-            //    this.name = n;
-            //}
         }
     });
 })();
@@ -87,7 +109,7 @@ image.id
 
 currentImage is null, unless someone clicks on the image
 component needs to know the id. ajax requerst to
-component has a mounted functino
+component has a mounted function
 
 table for comments
 
@@ -105,22 +127,8 @@ axios.post('/comment', {
 
 */
 
-/* spiced PG, pass right path
-create db file,
-make a route, database query SELECT * FROM images (reverse chronological order) ORDER BY id DESC, #
-sends it back with json
+/*
 
-db.getImages().then(
-    ({rows}) => {
-        res.json(rows)
-    }
-)
-
-ajax.request
-
-image to be these rows
-
-image itseld and it's title
 
 created: function() {
     console.log("created");

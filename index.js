@@ -67,7 +67,23 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     }
 });
 
-// filename store in db, take uploaded file and put it in the data onject in a view
+// route for showing the modal window
+app.get("/images/:id", (req, res) => {
+    console.log(req.params.id);
+    db.showImage(req.params.id)
+        .then(results => {
+            console.log("results.rows: ", results.rows);
+            res.json(results.rows);
+        })
+        .catch(err => {
+            console.log("error in showImage", err);
+        });
+});
+
+// here will be the route for getting comments
+app.get("/images/:comments", (req, res) => {
+    // either db.showImage again or write another db query only for comments
+});
 
 app.listen(8080, () => {
     console.log("I am listening");

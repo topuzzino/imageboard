@@ -79,3 +79,17 @@ body {
 .img-itself {
     min-height: ;
 }
+
+/* ---------------------- modal window ---------------------- */
+.modal-container {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    background-color: red;
+    opacity: 0.5;
+    border: 2px solid #fff;
+    color: #fff;
+    height: 90vh;
+    border-radius: 10px;
+}
