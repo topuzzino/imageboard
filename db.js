@@ -11,7 +11,7 @@ exports.getImages = function getImages() {
 
 exports.addImages = function addImages(url, username, description, title) {
     let q = `INSERT INTO images (url, username, description, title) VALUES
-    WHERE $1, $2, $3, $4 RETURNING id`;
+     ($1, $2, $3, $4) RETURNING *`;
     let params = [url, username, description, title];
-    return db.query[(q, params)];
+    return db.query(q, params);
 };

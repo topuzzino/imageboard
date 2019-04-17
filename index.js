@@ -48,9 +48,18 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     console.log("req.body: ", req.body); // { username: 'topuzzino', description: 'my cat', title: 'Kota' }
 
     if (req.file) {
-        res.json({
-            success: true
-        });
+        db.addImages(
+            url,
+            req.body.username,
+            req.body.description,
+            req.body.title
+        )
+            .then(data => {
+                res.json(data.rows);
+            })
+            .catch(err => {
+                console.log("error in addImages: ", err);
+            });
     } else {
         res.json({
             success: false

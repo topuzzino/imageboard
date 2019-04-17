@@ -11,6 +11,7 @@
                 <img class="logo" width="70" src="./img/logo.png" alt="">
             </div>
         </header>
+        <!-- <first-component @change="nameChange" funky="duck"></first-component> -->
 
     <form class="image-form" action="index.html" method="post">
         <!-- v-model binds input with the data object from script.js file, every time the user types smth, it updates in the data object   -->
@@ -22,7 +23,7 @@
     </form>
 
         <div class="image-gallery">
-            <div class="image-wrapper" v-if="images.length" :key="img.id" v-for="img in images">
+            <div class="image-wrapper" @click="click(image.id)" v-if="images.length" :key="img.id" v-for="img in images">
                 <div class="eachImage-wrapper"> <!-- here also may be added the img.id, don't know yet -->
                     <img class="img-itself" :src="img.url" :alt="img.title" width="350" height="350">
                 </div>
@@ -31,7 +32,17 @@
             </div>
         </div>
 
+        <!-- <first-component @change="nameChange" funky="chicken" v-bind:nickname="name"></first-component>
+        <image-modal v-if="currentImage" :id="currentImage" @close="closeModal"></image-modal> -->
     </main>
+    <!-- Vue component template -->
+    <script type="text/x-template" id="template">
+        <div class="template-wrapper">
+            <h1>this is {{name}} template</h1>
+            <p>{{nickname}}</p>
+        </div>
+    </script>
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>

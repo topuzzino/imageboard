@@ -1,4 +1,24 @@
 (function() {
+    Vue.component("first-component", {
+        template: "#template",
+        data: function() {
+            return {
+                name: "Jenka",
+                title: "" // value will come after ajax request
+            };
+        },
+        props: ["funky", "nickname"],
+        mounted: function() {
+            // should have
+        },
+        methods: {
+            click: function() {
+                this.name = this.funky;
+                this.$emit("change", this.funky); // $emit ised to fire an event
+            }
+        }
+    });
+
     new Vue({
         el: "#main", // el property tells Vue what element your UI will appear in
         data: {
@@ -10,6 +30,7 @@
                 file: null
             }
         },
+
         mounted: function() {
             // rendered one time without being updated
             // ajax requests to get data
@@ -40,15 +61,49 @@
                 formData.append("title", this.form.title);
                 //console.log("formData: ", formData); // empty object
 
-                axios.post("/upload", formData).then(function() {
+                var mrrr = this;
+
+                axios.post("/upload", formData).then(function(res) {
                     console.log("then of POST /upload");
                     console.log("res.data: ", res.data);
-                    this.images.unshift(res.data);
+                    mrrr.images.unshift(res.data[0]);
                 });
             }
+            //nameChange: function(n) {
+            //    this.name = n;
+            //}
         }
     });
 })();
+
+/*
+modal - will be a component. should show comments, if there are any.
+we may choose more components
+
+CSS - position: fix, modal should cover everything underneath (transparent could also be nice)
+more component: render the comment, each comment could be a component,
+
+image.id
+
+currentImage is null, unless someone clicks on the image
+component needs to know the id. ajax requerst to
+component has a mounted functino
+
+table for comments
+
+2 routes for the comments
+
+button for modal for closing in the modal component itself, emit an event to ask the parent to close the child
+
+
+axios.post('/comment', {
+    comment: this.comment,
+    username: this.username,
+    id: this.id
+})
+ and then unshift the comment into the array of components
+
+*/
 
 /* spiced PG, pass right path
 create db file,
