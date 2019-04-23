@@ -4,25 +4,43 @@ var db = spicedPg(
         "postgres://postgres:postgres@localhost:5432/tabasco-imageboard"
 );
 
+///////////////////////////// SELECTS /////////////////////////////
+
 exports.getImages = function getImages() {
-    let q = `SELECT * FROM images ORDER BY id DESC`;
-    return db.query(q, []);
+    let q = `SELECT * FROM images ORDER BY id DESC LIMIT 8`;
+    return db.query(q);
 };
+
+exports.showImage = function showImage(id) {
+    let q = `SELECT * FROM images WHERE id = $1`;
+    return db.query(q, [id]);
+};
+
+exports.getComments = function getComments(image_id) {
+    let q = `SELECT * FROM comments WHERE image_id = $1`;
+    return db.query(q, [image_id]);
+};
+
+// tell us the smallest id from the database, $1 will be the current smallest id on the page, in the Vue's data object
+exports.getMoreImages = function getMoreImages(image_id) {
+    let q = `SELECT *, (
+        SELECT id FROM images
+        ORDER BY id ASC
+        LIMIT 1)
+        AS lowest_id FROM images
+        WHERE id < $1
+        ORDER BY id DESC
+        LIMIT 8`; // when the user clicks on the "more" button, number 8 is the amount of pics showing
+    return db.query(q, [image_id]);
+};
+
+///////////////////////////// INSERTS /////////////////////////////
 
 exports.addImages = function addImages(url, username, description, title) {
     let q = `INSERT INTO images (url, username, description, title) VALUES
      ($1, $2, $3, $4) RETURNING *`;
     let params = [url, username, description, title];
     return db.query(q, params);
-};
-
-exports.showImage = function showImage(id) {
-    let q = `SELECT images.id, images.title, images.description, images.username,
-    comments.comment, comment.username
-    FROM images JOIN comments
-    ON images.id = comments.image_id
-    WHERE images.id = $1`;
-    return db.query(q, [id]); // put JOIN just for now
 };
 
 exports.addComment = function addComment(image_id, username, comment) {

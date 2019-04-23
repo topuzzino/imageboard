@@ -27,23 +27,23 @@ var uploader = multer({
         fileSize: 2097152
     }
 });
-//------------
+
+//------------ MAIN ROUTE ------------
 
 app.get("/home", (req, res) => {
     db.getImages()
-        .then(({ rows }) => {
-            console.log("rows: ", rows); // prints an anonymous array of objects of images
-            res.json(rows);
+        .then(results => {
+            res.json(results.rows);
         })
         .catch(err => {
             console.log("error in getImages: ", err);
         });
 });
 
+//------------ IMAGE UPLOAD ROUTE ------------
+
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     const url = config.s3Url + req.file.filename;
-
-    // If nothing went wrong the file is already in the uploads directory
     console.log("req.file: ", req.file); // shows the uploaded file
     console.log("req.body: ", req.body); // { username: 'topuzzino', description: 'my cat', title: 'Kota' }
 
@@ -67,12 +67,12 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     }
 });
 
-// route for showing the modal window
-app.get("/images/:id", (req, res) => {
-    console.log(req.params.id);
-    db.showImage(req.params.id)
+//------------ IMAGE MODAL ROUTE ------------
+
+app.get("/images/:imageId", (req, res) => {
+    db.showImage(req.params.imageId)
         .then(results => {
-            console.log("results.rows: ", results.rows);
+            console.log("results.rows[0]: ", results.rows[0]);
             res.json(results.rows);
         })
         .catch(err => {
@@ -80,9 +80,17 @@ app.get("/images/:id", (req, res) => {
         });
 });
 
-// here will be the route for getting comments
-app.get("/images/:comments", (req, res) => {
-    // either db.showImage again or write another db query only for comments
+//------------ COMMENTS in MODAL ROUTE ------------
+
+app.post("/images/:imageId", (req, res) => {
+    db.addComment(req.body.username, req.body.comment, req.params.imageId)
+        .then(results => {
+            console.log("results of addComments: ", results);
+            res.json(results.rows);
+        })
+        .catch(err => {
+            console.log("err in addComment: ", err);
+        });
 });
 
 app.listen(8080, () => {

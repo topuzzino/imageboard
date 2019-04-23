@@ -6,90 +6,324 @@ colors: #525b56
 body {
     padding: 0;
     margin: 0;
-    background-color: #132226;
     color: #a4978e;
+    background-image: url("./img/bg.jpg");
+    width: 100%;
+    background-repeat: no-repeat;
+    font-family: "Alegreya Sans SC", sans-serif;
 }
 
-.funky {
-    background-color: red;
+.visually-hidden {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
 }
 
-.ugly {
-    color: blue;
+p {
+    font-family: "Montserrat", sans-serif;
 }
 
 .main-header {
-    border-bottom: 2px solid #a4978e;
+    position: relative;
+    min-height: 100px;
+    display: flex;
+    justify-content: flex-start;
+}
+/*
+.main-header::before {
+    position: absolute;
+    content: "";
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+}
+*/
+.logo-wrapper {
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-right: calc(50% - 270px);
 }
 
 .logo {
 }
 
+h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    color: #ff0049;
+    letter-spacing: 10px;
+    margin-top: 50px;
+}
+
+/* ---------------------- form  ---------------------- */
+
 .image-form {
-    margin-top: 20px;
-    padding-left: 50px;
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 40px;
     padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #a4978e;
+    margin-bottom: 100px;
 }
 
 .image-form input {
-    border: none;
-    background-color: #a4978e;
-    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ff0049;
+    border-radius: 3px;
+    background-color: transparent;
+    width: 220px;
     height: 50px;
-    padding-left: 10px;
+    padding-left: 50px;
+}
+
+.image-form input:hover,
+.image-form input:focus {
+    border: 2px solid #c4bbff;
+}
+
+.image-form label {
+    position: relative;
+}
+
+input + label::before {
+    position: absolute;
+    content: "";
+    top: 14px;
+    left: -225px;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+#input-title + label::before {
+    background-image: url("./img/img-pic.svg");
+    background-size: 18px auto;
+}
+
+#input-descr + label::before {
+    background-image: url("./img/descr-pic.svg");
+    background-size: 25px auto;
+}
+
+#input-username + label::before {
+    background-image: url("./img/user-pic.svg");
+    background-size: 17px auto;
+}
+
+#input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#input-file + label {
+    border: 2px solid #ff0049;
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 0;
+}
+
+#input-file + label:hover {
+    border: 2px solid #c4bbff;
+}
+
+#input-file + label:hover strong {
+    background-color: #c4bbff;
+}
+
+#input-file + label span {
+    width: 150px;
+    display: inline-block;
+}
+
+#input-file + label strong {
+    width: 120px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    color: #fff;
+    background-color: #ff0049;
+    display: inline-block;
+    font-size: 17px;
 }
 
 .image-form button {
     border: none;
-    width: 70px;
+    width: 120px;
     height: 50px;
+    background-color: #ff0049;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: normal;
+    margin-left: 20px;
 }
 
 .image-form button:hover {
-    background-color: #a4978e;
+    background-color: #c4bbff;
 }
 
 .image-form button:active {
-    border: 1px solid #a4978e;
-    background-color: #525b56;
+    border: 1px solid #c4bbff;
+    background-color: #fff;
 }
+
+/* ---------------------- image gallery ---------------------- */
 
 .image-gallery {
     display: flex;
+    width: 1000px;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: 40px;
-    margin-right: 40px;
+    width: 1200px;
+    margin: 0 auto;
     box-sizing: border-box;
-    width: 90%;
+    padding-top: 20px;
 }
 
 .image-wrapper {
-    width: 25%;
-    border: 2px solid #a4978e;
+    width: 260px;
+    border: 1px solid #ff0049;
+    background-color: #fff;
+    color: #ff0049;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
 }
 
 .eachImage-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 25px auto;
     overflow: hidden;
-    border-bottom: 2px solid #a4978e;
 }
 
 .img-itself {
-    min-height: ;
+    width: 100%;
+    min-height: 200px;
+    object-fit: cover;
+}
+
+.image-info {
+    background-color: #fff;
+    border-top: 1px solid #ff0049;
+    padding: 25px;
+}
+
+h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #ff0049;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 0;
+}
+
+.img-desc {
+    padding: 0;
+    margin: 0;
+    color: #5934f6;
+    font-size: 14px;
 }
 
 /* ---------------------- modal window ---------------------- */
+.template-wrapper {
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+}
+
 .modal-container {
     position: absolute;
-    top: 40px;
-    left: 40px;
-    right: 40px;
-    background-color: red;
-    opacity: 0.5;
-    border: 2px solid #fff;
+    top: 60px;
+    left: calc(50% - 350px);
+    background-color: #ff0049;
+    background-image: url("./img/bg.jpg");
     color: #fff;
-    height: 90vh;
+    width: 700px;
     border-radius: 10px;
+    z-index: 100;
+    padding: 40px;
+    text-align: center;
+}
+
+.modal-container h1 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.close-modal {
+    position: absolute;
+    content: "x";
+    top: 20px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.close-modal::after {
+    width: 2px;
+    height: 20px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    transform: rotate(45deg);
+    top: 0;
+    right: 12px;
+}
+
+.close-modal::before {
+    width: 2px;
+    height: 20px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    transform: rotate(-45deg);
+    top: 0;
+    left: 7px;
+}
+
+.modal-img-wrapper {
+    width: 500px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.modal-img {
+    display: block;
+    width: 500px;
+    height: auto;
+}
+
+.modal-descr {
+    color: #5934f6;
+    font-size: 30px;
+    border-bottom: 2px solid #ff0049;
+}
+
+.modal-image-info {
+    color: #5934f6;
+    font-size: 20px;
 }
