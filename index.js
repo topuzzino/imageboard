@@ -93,6 +93,13 @@ app.post("/images/:imageId", (req, res) => {
         });
 });
 
+/*
 app.listen(8080, () => {
     console.log("I am listening");
+});
+*/
+
+// Port for Heroku
+app.listen(process.env.PORT || 8080, function() {
+    console.log("I'm listening");
 });
