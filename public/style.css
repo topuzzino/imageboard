@@ -8,6 +8,7 @@ body {
     margin: 0;
     color: #a4978e;
     background-image: url("./img/bg.jpg");
+    background-attachment: fixed;
     width: 100%;
     background-repeat: no-repeat;
     font-family: "Alegreya Sans SC", sans-serif;
@@ -84,6 +85,44 @@ h1 {
     width: 220px;
     height: 50px;
     padding-left: 50px;
+}
+
+.comment-form {
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-form input {
+    box-sizing: border-box;
+    border: 1px solid #ff0049;
+    border-radius: 3px;
+    background-color: transparent;
+    padding-left: 7px;
+    width: 180px;
+    height: 30px;
+}
+
+.comment-form input:hover,
+.comment-form input:focus {
+    border: 1px solid #c4bbff;
+}
+
+.comment-form button {
+    border: none;
+    width: 100px;
+    height: 30px;
+    background-color: #ff0049;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.comment-form button:hover,
+.comment-form button:focus {
+    background-color: #c4bbff;
 }
 
 .image-form input:hover,
@@ -185,10 +224,8 @@ input + label::before {
 
 .image-gallery {
     display: flex;
-    width: 1000px;
-    justify-content: space-between;
-    flex-wrap: wrap;
     width: 1200px;
+    flex-wrap: wrap;
     margin: 0 auto;
     box-sizing: border-box;
     padding-top: 20px;
@@ -202,6 +239,11 @@ input + label::before {
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
+    margin-right: 50px;
+}
+
+.image-wrapper:nth-child(4n) {
+    margin-right: 0;
 }
 
 .eachImage-wrapper {
@@ -285,24 +327,24 @@ h3 {
 
 .close-modal::after {
     width: 2px;
-    height: 20px;
+    height: 25px;
     background-color: #000;
     position: absolute;
     content: "";
     transform: rotate(45deg);
     top: 0;
-    right: 12px;
+    left: 11px;
 }
 
 .close-modal::before {
     width: 2px;
-    height: 20px;
+    height: 25px;
     background-color: #000;
     position: absolute;
     content: "";
     transform: rotate(-45deg);
     top: 0;
-    left: 7px;
+    left: 11px;
 }
 
 .modal-img-wrapper {
