@@ -33,7 +33,7 @@
             <div class="image-wrapper" v-if="images.length" @click="clickImage(image.id)" :key="image.id" v-for="image in images">
                 <div class="eachImage-wrapper">
                     <a :href="'#' + image.id">
-                        <img class="img-itself" :src="image.url" :alt="image.title" width="350" height="350">
+                        <img class="img-itself" :src="image.url" :alt="image.title" width="350" height="auto">
                     </a>
                 </div>
                 <div class="image-info">
